@@ -1,34 +1,52 @@
 <x-guest-layout>
-    <x-authentication-card>
-        <x-slot name="logo">
-            <x-authentication-card-logo />
-        </x-slot>
+    <div class="min-h-screen flex items-center justify-center bg-gray-100">
 
-        <div class="mb-4 text-sm text-gray-600">
-            {{ __('Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.') }}
+        <div class="w-full max-w-md bg-white shadow-xl rounded-2xl p-8 border">
+
+            <!-- Logo -->
+            <div class="flex justify-center mb-4">
+                <x-authentication-card-logo />
+            </div>
+
+            <!-- Título -->
+            <h2 class="text-xl font-semibold text-gray-800 text-center mb-2">
+                Acceso restringido
+            </h2>
+
+            <p class="text-sm text-gray-500 text-center mb-6">
+                Recuperación de contraseña deshabilitada
+            </p>
+
+            <!-- Línea -->
+            <div class="border-t mb-6"></div>
+
+            <!-- Mensaje -->
+            <div class="text-sm text-gray-600 text-center mb-6 leading-relaxed">
+                Por políticas de seguridad del sistema, esta opción no está disponible.
+            </div>
+
+            <!-- Alerta -->
+            <div class="flex items-start gap-3 p-4 rounded-lg bg-yellow-50 border border-yellow-300 text-yellow-800 mb-6">
+                <span class="text-lg">⚠️</span>
+                <span class="text-sm">
+                    Comuníquese con el administrador para restablecer su acceso.
+                </span>
+            </div>
+
+            <!-- Contacto -->
+            <div class="text-center text-sm text-gray-500 mb-6">
+                Soporte: <span class="text-blue-600 font-medium">admin@istta.edu.pe</span>
+            </div>
+
+            <!-- Botón -->
+            <div class="text-center">
+                <a href="{{ route('login') }}"
+                   class="inline-block px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm rounded-lg shadow">
+                    Volver al inicio
+                </a>
+            </div>
+
         </div>
 
-        @session('status')
-            <div class="mb-4 font-medium text-sm text-green-600">
-                {{ $value }}
-            </div>
-        @endsession
-
-        <x-validation-errors class="mb-4" />
-
-        <form method="POST" action="{{ route('password.email') }}">
-            @csrf
-
-            <div class="block">
-                <x-label for="email" value="{{ __('Email') }}" />
-                <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
-            </div>
-
-            <div class="flex items-center justify-end mt-4">
-                <x-button>
-                    {{ __('Email Password Reset Link') }}
-                </x-button>
-            </div>
-        </form>
-    </x-authentication-card>
+    </div>
 </x-guest-layout>
