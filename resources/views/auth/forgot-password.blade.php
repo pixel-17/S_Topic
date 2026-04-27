@@ -1,52 +1,64 @@
-<x-guest-layout>
-    <div class="min-h-screen flex items-center justify-center bg-gray-100">
+@section('title', 'Recuperar Contraseña')
 
-        <div class="w-full max-w-md bg-white shadow-xl rounded-2xl p-8 border">
+<div style="max-width:500px; margin:60px auto; font-family:Arial, sans-serif;">
+    
+    <div style="background:#ffffff; padding:28px; border-radius:10px; box-shadow:0 4px 12px rgba(0,0,0,0.08);">
 
-            <!-- Logo -->
-            <div class="flex justify-center mb-4">
-                <x-authentication-card-logo />
+        <h2 style="margin-bottom:6px; color:#111827;">🔐 Recuperar Contraseña</h2>
+
+        <p style="color:#6b7280; margin-bottom:20px;">
+            Ingresa tu correo electrónico y te enviaremos un enlace para restablecer tu contraseña.
+        </p>
+
+        {{-- MENSAJE DE ÉXITO --}}
+        @if(session('success'))
+            <div style="background:#dcfce7; border:1px solid #86efac; padding:12px; border-radius:6px; color:#166534; margin-bottom:16px;">
+                {{ session('success') }}
+            </div>
+        @endif
+
+        {{-- ERRORES --}}
+        @if($errors->any())
+            <div style="background:#fee2e2; border:1px solid #fca5a5; padding:12px; border-radius:6px; color:#991b1b; margin-bottom:16px;">
+                @foreach($errors->all() as $error)
+                    <div>• {{ $error }}</div>
+                @endforeach
+            </div>
+        @endif
+
+        <form method="POST" action="{{ route('password.send') }}">
+            @csrf
+            
+            <div style="margin-bottom:20px;">
+                <label style="display:block; margin-bottom:6px; font-weight:500;">
+                    Correo Electrónico
+                </label>
+
+                <input 
+                    type="email" 
+                    name="email" 
+                    value="{{ old('email') }}"
+                    required
+                    style="width:100%; padding:10px; border:1px solid #d1d5db; border-radius:6px;"
+                    placeholder="ejemplo@correo.com"
+                >
+
+                <small style="color:#6b7280;">
+                    Asegúrate de ingresar el correo registrado en el sistema
+                </small>
             </div>
 
-            <!-- Título -->
-            <h2 class="text-xl font-semibold text-gray-800 text-center mb-2">
-                Acceso restringido
-            </h2>
+            <button type="submit"
+                style="width:100%; background:#2563eb; color:white; padding:12px; border:none; border-radius:6px; font-weight:600; cursor:pointer;">
+                📧 Enviar enlace de recuperación
+            </button>
+        </form>
 
-            <p class="text-sm text-gray-500 text-center mb-6">
-                Recuperación de contraseña deshabilitada
-            </p>
-
-            <!-- Línea -->
-            <div class="border-t mb-6"></div>
-
-            <!-- Mensaje -->
-            <div class="text-sm text-gray-600 text-center mb-6 leading-relaxed">
-                Por políticas de seguridad del sistema, esta opción no está disponible.
-            </div>
-
-            <!-- Alerta -->
-            <div class="flex items-start gap-3 p-4 rounded-lg bg-yellow-50 border border-yellow-300 text-yellow-800 mb-6">
-                <span class="text-lg">⚠️</span>
-                <span class="text-sm">
-                    Comuníquese con el administrador para restablecer su acceso.
-                </span>
-            </div>
-
-            <!-- Contacto -->
-            <div class="text-center text-sm text-gray-500 mb-6">
-                Soporte: <span class="text-blue-600 font-medium">admin@istta.edu.pe</span>
-            </div>
-
-            <!-- Botón -->
-            <div class="text-center">
-                <a href="{{ route('login') }}"
-                   class="inline-block px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm rounded-lg shadow">
-                    Volver al inicio
-                </a>
-            </div>
-
+        <div style="text-align:center; margin-top:18px;">
+            <a href="{{ route('login') }}" style="color:#2563eb; text-decoration:none;">
+                ← Volver al Login
+            </a>
         </div>
 
     </div>
-</x-guest-layout>
+</div>

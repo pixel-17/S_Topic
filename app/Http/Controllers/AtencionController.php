@@ -5,6 +5,7 @@ use App\Models\Atencion;
 use App\Models\Estudiante;
 use App\Models\Motivo;
 use App\Models\CategoriaMotivo;
+use App\Services\NotificacionEstudianteService;
 use Illuminate\Http\Request;
 
 class AtencionController extends Controller
@@ -68,7 +69,7 @@ class AtencionController extends Controller
             'es_recurrente' => $esRecurrente,
             'derivado'      => $request->boolean('derivado'),
         ]);
- 
+        NotificacionEstudianteService::notificarAtencionCompletada($atencion);
         $mensaje = $esRecurrente
             ? '⚠️ Atención registrada. CASO RECURRENTE detectado para este motivo.'
             : 'Atención registrada correctamente.';

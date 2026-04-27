@@ -40,6 +40,10 @@
                 <label>Apellidos <span style="color:var(--danger)">*</span></label>
                 <input type="text" name="apellidos" value="{{ old('apellidos',$estudiante->apellidos) }}" class="form-control">
             </div>
+             <div class="form-group">
+                <label>Correo <span style="color:var(--danger)">*</span></label>
+                <input type="email" name="email" value="{{ old('email',$estudiante->email) }}" class="form-control">
+            </div>
             <div class="form-group">
                 <label>Fecha de nacimiento</label>
                 <input type="date" name="fecha_nacimiento" id="fecha_nacimiento"

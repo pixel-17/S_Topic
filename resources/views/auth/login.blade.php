@@ -196,7 +196,15 @@ body{font-family:'DM Sans',sans-serif;min-height:100vh;background:var(--bg);disp
                     <input type="checkbox" name="remember"> Recordarme
                 </label>
                 @if(Route::has('password.request'))
-                    <a href="{{ route('password.request') }}" style="font-size:13px;color:#2a9d8f;font-weight:500;">¿Olvidaste tu contraseña?</a>
+                    
+                <div style="text-align:center; margin-top:16px; margin-bottom:16px;">
+                    <p style="font-size:13px; color:var(--muted);">
+                        ¿Olvidaste tu contraseña?
+                        <a href="{{ route('password.request') }}" style="color:var(--primary); text-decoration:none; font-weight:600;">
+                            Recuperarla aquí
+                        </a>
+                    </p>
+                </div>
                 @endif
             </div>
 

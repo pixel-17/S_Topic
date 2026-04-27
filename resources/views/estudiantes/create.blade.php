@@ -43,6 +43,17 @@
                 @error('apellidos')<div class="invalid-feedback">⚠ {{ $message }}</div>@enderror
             </div>
             <div class="form-group">
+                <label>Email del Estudiante</label>
+                <input 
+                    type="email" 
+                    name="email" 
+                    class="form-control"
+                    value="{{ old('email') }}"
+                    placeholder="alumno@email.com"
+                >
+                <small style="color:var(--muted);">Necesario para recibir notificaciones</small>
+            </div>
+            <div class="form-group">
                 <label>Fecha de nacimiento</label>
                 <input type="date" name="fecha_nacimiento" id="fecha_nacimiento"
                     value="{{ old('fecha_nacimiento') }}"

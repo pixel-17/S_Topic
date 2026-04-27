@@ -28,6 +28,7 @@ class EstudianteController extends Controller {
             'dni'              => 'required|digits:8|unique:estudiantes,dni',
             'nombres'          => 'required|string|max:100',
             'apellidos'        => 'required|string|max:100',
+            'email'         => 'required|email|unique:estudiantes', 
             'fecha_nacimiento' => 'nullable|date|before:'.now()->subYears(12)->format('Y-m-d'),
             'genero'           => 'nullable|in:M,F',
             'telefono'         => 'nullable|string|max:15',
@@ -48,7 +49,7 @@ class EstudianteController extends Controller {
         ]);
 
         $estudiante = Estudiante::create($request->only([
-            'dni','nombres','apellidos','fecha_nacimiento','genero','telefono','carrera_id','semestre',
+            'dni','nombres','apellidos','email','fecha_nacimiento','genero','telefono','carrera_id','semestre',
         ]));
 
         FichaMedica::create(array_merge(
@@ -78,6 +79,7 @@ class EstudianteController extends Controller {
             'dni'              => 'required|digits:8|unique:estudiantes,dni,'.$estudiante->id,
             'nombres'          => 'required|string|max:100',
             'apellidos'        => 'required|string|max:100',
+            'email'            => 'required|email|unique:estudiantes,email,' . $estudiante->id,  
             'fecha_nacimiento' => 'nullable|date|before:'.now()->subYears(12)->format('Y-m-d'),
             'genero'           => 'nullable|in:M,F',
             'telefono'         => 'nullable|string|max:15',
@@ -94,7 +96,7 @@ class EstudianteController extends Controller {
         ]);
 
         $estudiante->update($request->only([
-            'dni','nombres','apellidos','fecha_nacimiento','genero','telefono','carrera_id','semestre',
+            'dni','nombres','apellidos','email','fecha_nacimiento','genero','telefono','carrera_id','semestre',
         ]));
 
         $estudiante->fichaMedica()->updateOrCreate(
